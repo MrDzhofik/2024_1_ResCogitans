@@ -3,6 +3,7 @@ package profile
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -62,6 +63,8 @@ func (h *ProfileHandler) Edit(ctx context.Context, requestData entities.UserProf
 // TODO: нужно будет убрать это инженерное решение (костыль) после фикса обертки
 func (h *ProfileHandler) UploadFile(w http.ResponseWriter, r *http.Request) {
 	logger := logger.Logger()
+
+	fmt.Println("Upload profile handler")
 
 	userID, err := strconv.Atoi(wrapper.GetPathParams(r)["id"])
 	if err != nil {

@@ -74,7 +74,7 @@ func SaveFile(r *http.Request) (string, error) {
 	}
 
 	cfg, _ := config.LoadConfig()
-	targetFile, err := os.Create(cfg.FileUploadPath + handler.Filename)
+	targetFile, err := os.Create(cfg.FileUploadPath + "/" + handler.Filename)
 	if err != nil {
 		logger.Error("Error while creating file:", "error", err)
 		return string(""), err
@@ -87,5 +87,7 @@ func SaveFile(r *http.Request) (string, error) {
 		return string(""), err
 	}
 
-	return targetFile.Name(), nil
+	fmt.Println("TargetFile: ", targetFile.Name())
+
+	return handler.Filename, nil
 }

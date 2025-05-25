@@ -8,7 +8,6 @@ import (
 	"github.com/go-park-mail-ru/2024_1_ResCogitans/internal/config"
 	album "github.com/go-park-mail-ru/2024_1_ResCogitans/internal/delivery/handlers/album"
 	"github.com/go-park-mail-ru/2024_1_ResCogitans/internal/delivery/handlers/authorization"
-	user "github.com/go-park-mail-ru/2024_1_ResCogitans/internal/delivery/handlers/avatar"
 	"github.com/go-park-mail-ru/2024_1_ResCogitans/internal/delivery/handlers/category"
 	"github.com/go-park-mail-ru/2024_1_ResCogitans/internal/delivery/handlers/comment"
 	"github.com/go-park-mail-ru/2024_1_ResCogitans/internal/delivery/handlers/deactivation"
@@ -40,7 +39,7 @@ func SetupRouter(_ *config.Config, handlers *initialization.Handlers) *chi.Mux {
 	// prometheus
 
 	// upload image
-	router.HandleFunc("/api/profile/{id}/upload", user.Upload)
+	// router.HandleFunc("/api/profile/{id}/upload", user.Upload)
 	router.HandleFunc("/api/album/{albumID}/upload", album.UploadImageAndInsert)
 
 	router.Mount("/api/sights", SightRoutes(handlers.SightHandler))
@@ -58,7 +57,7 @@ func SetupRouter(_ *config.Config, handlers *initialization.Handlers) *chi.Mux {
 	router.Mount("/api/profile/{id}/reset_password", UpdateUserPasswordRoutes(handlers.AuthHandler))
 
 	//TODO:нужно приспособить обертку под работу multipart/form-data
-	router.Post("/profile/{id}/upload", func(w http.ResponseWriter, r *http.Request) {
+	router.Post("/api/profile/{id}/upload", func(w http.ResponseWriter, r *http.Request) {
 		handlers.ProfileHandler.UploadFile(w, r)
 	})
 

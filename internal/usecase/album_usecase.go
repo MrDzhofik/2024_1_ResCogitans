@@ -56,11 +56,6 @@ func (au *AlbumUseCase) DeletePhoto(photoID int) error {
 		return err
 	}
 
-	// err = deleteResource(photo.Path)
-	// if err != nil {
-	// 	fmt.Printf("Error deleting resource: %s\n", err)
-	// 	return err
-	// }
 	return nil
 }
 
@@ -78,9 +73,6 @@ func (au *AlbumUseCase) GetAlbumByID(albumID int) (entities.AlbumAndPhoto, error
 
 	for index, photo := range albumPhotos {
 		albumPhotos[index].Path = "/album/" + photo.Path
-		if err != nil {
-			return entities.AlbumAndPhoto{}, err
-		}
 	}
 
 	albumAndPhotos.Info = albumInfo

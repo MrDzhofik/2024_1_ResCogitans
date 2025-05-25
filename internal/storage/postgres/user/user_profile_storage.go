@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"fmt"
 	"sync"
 
 	"github.com/georgysavva/scany/v2/pgxscan"
@@ -69,6 +70,7 @@ func (up *UserProfileStorage) EditUserBio(userID int, bio string) error {
 
 func (up *UserProfileStorage) EditUserAvatar(userID int, avatar string) error {
 	ctx := context.Background()
+	fmt.Println("Avatar Storage avatar = ", avatar, "user_id = ", userID)
 	_, err := up.db.Exec(ctx, "UPDATE profile_data SET avatar = $1 WHERE user_id = $2", avatar, userID)
 	return err
 }
